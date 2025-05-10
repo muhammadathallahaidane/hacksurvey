@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Surveyor Vessel List PDF</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" crossorigin="anonymous">
+  <style>
+    body {
+      font-size: 12px;
+    }
+    .table img {
+      max-width: 100px;
+    }
+  </style>
+</head>
+<body class="bg-white">
+  <div class="container mt-4">
+    <h2 class="text-center mb-3">Surveyor Vessel List</h2>
+
+    <% if (name) { %>
+      <p><strong>Filtered by:</strong> "<%= name %>"</p>
+    <% } %>
+
+    <table class="table table-bordered table-sm text-center align-middle">
+      <thead class="thead-dark">
+        <tr>
+          <th>No</th>
+          <th>Image</th>
+          <th>Name</th>
+          <th>Type</th>
+          <th>IMO Number</th>
+          <th>Year Built</th>
+          <th>Port Registry</th>
+          <th>Survey Type</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% allShips.forEach((el, i) => { %>
+          <tr>
+            <td><%= i + 1 %></td>
+            <td>
+              <% if (el.imageUrl) { %>
+                <img src="<%= el.imageUrl %>" alt="Ship Image">
+              <% } else { %>
+                <span class="text-muted">No Image</span>
+              <% } %>
+            </td>
+            <td><%= el.addMVtoName %></td>
+            <td><%= el.type %></td>
+            <td><%= el.IMONumber %></td>
+            <td><%= yearOnly(el.yearBuilt) %></td>
+            <td><%= el.portRegistry %></td>
+            <td>
+              <% el.Surveys.forEach(survey => { %>
+                <div><%= survey.type %></div>
+              <% }) %>
+            </td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>

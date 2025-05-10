@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ships Vessel List</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+</head>
+<body class="bg-light">
+    <div class="container mt-5">
+      <div class="card shadow">
+        <div class="card-header bg-dark text-white text-center">
+          <h3>Surveyor Vessel List</h3>
+        </div>
+  
+        <div class="card-body">
+  
+          <form class="form-inline mb-3 justify-content-center" action="/profile/<%= ProfileId %>/ships" method="get">
+            <input type="text" name="search" class="form-control mr-2" placeholder="Search for Ship...">
+            <button class="btn btn-success" type="submit">Search</button>
+          </form>
+  
+          <% if (name) { %>
+            <div class="alert alert-warning alert-dismissible fade show text-center" role="alert">
+              <strong>Survey for <%= name %> has been done.</strong>
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+          <% } %>
+  
+          <div class="table-responsive">
+            <table class="table table-bordered table-hover table-striped text-center align-middle">
+              <thead class="thead-dark">
+                <tr>
+                  <th>No</th>
+                  <th>Image</th>
+                  <th>Name</th>
+                  <th>Type</th>
+                  <th>IMO Number</th>
+                  <th>Year Built</th>
+                  <th>Port Registry</th>
+                  <th>Survey Type</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% allShips.forEach((el, i) => { %>
+                  <tr>
+                    <td><%= i + 1 %></td>
+                    <td>
+                      <img src="<%= el.imageUrl %>" class="img-thumbnail" style="max-width: 120px;" alt="Ship">
+                    </td>
+                    <td><strong><%= el.addMVtoName %></strong></td>
+                    <td><%= el.type %></td>
+                    <td><%= el.IMONumber %></td>
+                    <td><%= yearOnly(el.yearBuilt) %></td>
+                    <td><%= el.portRegistry %></td>
+                    <td>
+                        <% el.Surveys.forEach(survey => { %>
+                            <% if (survey.type === "Annual Survey") { %>
+                                <span class="badge badge-primary mb-1"><%= survey.type %></span><br/>
+                            <% } else { %>
+                                <span class="badge badge-secondary mb-1"><%= survey.type %></span><br/>
+                            <% } %>
+                        <% }) %>
+                    </td>
+                    <td>
+                      <a href="/profile/<%= ProfileId %>/ships/<%= el.id %>/delete" class="btn btn-success btn-sm">Survey Done</a>
+                    </td>
+                  </tr>
+                <% }) %>
+              </tbody>
+            </table>
+            <a href="/profile/<%= ProfileId %>/ships/export" class="btn btn-danger mb-3">
+              Export to PDF
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+  </html>

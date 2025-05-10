@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile Detail</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+        integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+</head>
+<body class="bg-light">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="/profile/<%= profile.id %>">HackSurvey</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav mr-auto"></ul>
+            <ul class="navbar-nav">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <%= profile.User.username %>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="/profile/<%= profile.id %>/ships">Ship List</a>
+                        <a class="dropdown-item" href="/profile/<%= profile.id %>/edit">Edit Profile</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-danger" href="/profile/<%= profile.id %>/logout">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container mt-5">
+        <div class="card mx-auto" style="max-width: 600px;">
+            <div class="card-header bg-dark text-white">
+                <h4>Profile Details</h4>
+            </div>
+            <div class="card-body">
+                <p><strong>Full Name:</strong> <%= profile.fullName %></p>
+                <p><strong>City:</strong> <%= profile.city %></p>
+                <p><strong>Age:</strong> <%= profile.age %></p>
+                <p><strong>Username:</strong> <%= profile.User.username %></p>
+                <p><strong>Email:</strong> <%= profile.User.email %></p>
+                <p><strong>Role:</strong> <%= profile.User.role %></p>
+            </div>
+            <div class="card-footer d-flex justify-content-between">
+                <a href="/profile/<%= profile.id %>/edit" class="btn btn-warning">Edit</a>
+                <a href="/profile/<%= profile.id %>/delete" class="btn btn-danger">Delete Profile</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

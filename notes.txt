@@ -1,0 +1,9 @@
+npx sequelize-cli model:generate --name User --attributes username:string,email:string,email:string,password:string,role:string
+
+npx sequelize-cli model:generate --name Profile --attributes fullname:string,city:string,age:integer,UserId:integer
+
+npx sequelize-cli model:generate --name Ship --attributes name:string,IMONumber:integer,yearBuilt:integer,portRegistry:integer,ProfileId:integer
+
+npx sequelize-cli model:generate --name Survey --attributes type:string
+
+npx sequelize-cli model:generate --name ShipSurvey --attributes ShipId:integer,SurveyId:integer
